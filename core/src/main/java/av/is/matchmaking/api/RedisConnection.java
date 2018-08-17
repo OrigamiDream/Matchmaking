@@ -1,4 +1,6 @@
-package av.is.matchmaking;
+package av.is.matchmaking.api;
+
+import av.is.matchmaking.RedisType;
 
 /**
  * Created by OrigamiDream on 2018-08-16.

@@ -3,6 +3,9 @@
 # Folders
 /.idea
 /.git
+/target
+/out
 
 # Files
 *.iml
+dependency-reduced-pom.xml

@@ -1,5 +1,7 @@
 package av.is.matchmaking;
 
+import av.is.matchmaking.api.RedisConnection;
+
 /**
  * Created by OrigamiDream on 2018-08-16.
  */

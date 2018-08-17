@@ -1,9 +1,17 @@
-package av.is.matchmaking;
+package av.is.matchmaking.api;
+
+import av.is.matchmaking.SimpleRedisConnection;
+
+import static av.is.matchmaking.RedisType.MASTER;
+import static av.is.matchmaking.RedisType.SLAVE;
 
 /**
  * Created by OrigamiDream on 2018-08-16.
  */
 public interface MatchmakingManager {
+    
+    public static final RedisConnection DEFAULT_WRITE_CONNECTION = new SimpleRedisConnection(MASTER, "DEFAULT-MASTER-01", "127.0.0.1", 6379);
+    public static final RedisConnection DEFAULT_READ_CONNECTION = new SimpleRedisConnection(SLAVE, "DEFAULT-SLAVE-01", "127.0.0.1", 6379);
     
     /**
      * Publish command to redis server.
@@ -31,7 +39,7 @@ public interface MatchmakingManager {
      * @param command   A storage of the command.
      * @param <C>       This implements both {@link Command} and {@link CommandResponse}.
      */
-    <C extends Command & CommandResponse> void registerRedis(String key, C command);
+    <C extends Command & CommandResponse> void registerRedis(String key, Class<C> command);
     
     /**
      *

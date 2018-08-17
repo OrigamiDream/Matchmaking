@@ -1,5 +1,8 @@
 package av.is.matchmaking;
 
+import av.is.matchmaking.api.IMatchmaking;
+import av.is.matchmaking.api.MatchmakingManager;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +10,7 @@ import java.util.Map;
 /**
  * Created by OrigamiDream on 2018-08-16.
  */
-public class Matchmaking implements IMatchmaking {
+public final class Matchmaking implements IMatchmaking {
     
     private final Map<String, MatchmakingManager> managers = new HashMap<>();
     

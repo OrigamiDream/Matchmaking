@@ -1,5 +1,12 @@
 package av.is.matchmaking;
 
+import av.is.matchmaking.api.Command;
+import av.is.matchmaking.api.CommandResponse;
+import av.is.matchmaking.api.CommandStorage;
+import av.is.matchmaking.api.MatchmakingManager;
+import av.is.matchmaking.api.MergedCommandStorage;
+import av.is.matchmaking.api.RedisConnection;
+import av.is.matchmaking.api.SimpleCommandStorage;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
@@ -23,8 +30,6 @@ import static av.is.matchmaking.RedisType.SLAVE;
 final class MatchmakingManagerImpl implements MatchmakingManager {
     
     public static final String REDIS_CHANNEL = "matchmaking.commands";
-    public static final RedisConnection DEFAULT_WRITE_CONNECTION = new SimpleRedisConnection(MASTER, "DEFAULT-MASTER-01", "127.0.0.1", 6379);
-    public static final RedisConnection DEFAULT_READ_CONNECTION = new SimpleRedisConnection(SLAVE, "DEFAULT-SLAVE-01", "127.0.0.1", 6379);
     
     private static final Gson GSON = new Gson();
     private static final Random RANDOM = new Random();
@@ -61,9 +66,20 @@ final class MatchmakingManagerImpl implements MatchmakingManager {
     
     @Override
     public <C extends Command> void publishRedis(C command) {
+        String key = null;
+        for(Map.Entry<String, CommandStorage> entry : commandStorages.entrySet()) {
+            if(entry.getValue().getCommand() == command.getClass()) {
+                key = entry.getKey();
+            }
+        }
+        
+        if(key == null) {
+            throw new IllegalArgumentException("Unknown key for '" + command.getClass().getSimpleName() + "'");
+        }
+        String finalKey = key;
         new Thread(() -> {
             try(Jedis jedis = masterPool.getResource()) {
-                jedis.publish(REDIS_CHANNEL + ":" + command.getClass().getSimpleName(), GSON.toJson(command));
+                jedis.publish(REDIS_CHANNEL + ":" + finalKey, GSON.toJson(command));
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -82,10 +98,10 @@ final class MatchmakingManagerImpl implements MatchmakingManager {
     }
     
     @Override
-    public <C extends Command & CommandResponse> void registerRedis(String key, C command) {
+    public <C extends Command & CommandResponse> void registerRedis(String key, Class<C> command) {
         commandStorages.put(key, new MergedCommandStorage() {
             @Override
-            public C mergedCommand() {
+            public Class<C> mergedCommand() {
                 return command;
             }
         });

@@ -1,4 +1,4 @@
-package av.is.matchmaking;
+package av.is.matchmaking.api;
 
 import java.util.Collection;
 
