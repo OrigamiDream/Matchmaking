@@ -1,13 +1,13 @@
-#Matchmaking
+# Matchmaking
 
 <h6>A simple Matchmaking API for minecraft/jvm-environment programs</h6>
 
-###Requires
+### Requires
 - Redis (latest)
 <br/>
 <br/>
 
-###Compile
+### Compile
 This API uses Maven as a build management tool.
 To compile the sources, use following command:
 ```
@@ -15,7 +15,7 @@ mvn clean install
 ```
 <br/>
 
-###How to use
+### How to use
 To create your new matchmaking structure, write following code:
 ```
 MatchmakingManager matchmaking = Matchmaking.getInstance().getManager("matchmaking-01");
