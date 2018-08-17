@@ -5,6 +5,13 @@ package av.is.matchmaking.api;
  */
 interface CommandValidation {
     
+    /**
+     *
+     * Validate Redis destination when responding.
+     *
+     * @param destination
+     * @return
+     */
     boolean validate(String destination);
     
 }

@@ -5,8 +5,22 @@ package av.is.matchmaking.api;
  */
 public interface CommandStorage {
     
+    /**
+     *
+     * Get a type of command.
+     *
+     * @param <C>
+     * @return
+     */
     <C extends Command> Class<C> getCommand();
     
+    /**
+     *
+     * An instance to respond.
+     *
+     * @param <C>
+     * @return
+     */
     <C extends CommandResponse> C getCommandResponse();
     
 }

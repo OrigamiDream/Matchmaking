@@ -5,5 +5,13 @@ package av.is.matchmaking.api;
  */
 public interface CommandResponse {
     
+    /**
+     *
+     * Responds specific Redis command.
+     *
+     * You can respond various commands with only CommandResponse.
+     *
+     * @param command
+     */
     void respond(Command command);
 }

@@ -29,5 +29,12 @@ public interface MergedCommandStorage extends CommandStorage {
         throw new IllegalStateException("Failed to serialize command response with no constructor");
     }
     
+    /**
+     *
+     * Put class which implements both {@link Command} and {@link CommandResponse}.
+     *
+     * @param <C> This implements {@link Command} and {@link CommandResponse}.
+     * @return Class
+     */
     <C extends Command & CommandResponse> Class<C> mergedCommand();
 }
