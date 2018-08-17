@@ -67,5 +67,11 @@ public class NewHandler extends Command implements CommandResponse {
 ```
 matchmaking.registerRedis("myHandlerKey", NewHandler.class);
 ```
+**Publishing your Redis handler**
+```
+NewHandler newHandler = new NewHandler("my handler name", "my message");
+newHandler.setDestinations("target-matchmaking-id");
+matchmaking.publishRedis(newHandler);
+```
 
 You can get additional examples at [here.](https://github.com/OrigamiDream/Matchmaking/tree/master/example/src/main/java/av/is/matchmaking/example)
