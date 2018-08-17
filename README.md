@@ -5,7 +5,6 @@
 ### Requires
 - Redis (latest)
 <br/>
-<br/>
 
 ### Compile
 This API uses Maven as a build management tool.
