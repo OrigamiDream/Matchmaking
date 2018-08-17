@@ -3,7 +3,7 @@ package av.is.matchmaking.api;
 /**
  * Created by OrigamiDream on 2018-08-16.
  */
-public abstract class Command implements DefaultCommandResponse {
+public abstract class Command implements DefaultCommandResponse, CommandValidation, CommandDestination {
     
     private String[] destinations;
     
@@ -22,5 +22,19 @@ public abstract class Command implements DefaultCommandResponse {
             destinations = new String[0];
         }
         return destinations;
+    }
+    
+    @Override
+    public boolean validate(String destination) {
+        if(getDestinations().length == 0) {
+            return true;
+        }
+        
+        for(String cur : getDestinations()) {
+            if(cur.equalsIgnoreCase(destination)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

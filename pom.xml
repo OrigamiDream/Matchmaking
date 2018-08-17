@@ -11,6 +11,8 @@
     <modules>
         <module>core</module>
         <module>example</module>
+        <module>processor</module>
+        <module>match</module>
     </modules>
 
     <dependencies>

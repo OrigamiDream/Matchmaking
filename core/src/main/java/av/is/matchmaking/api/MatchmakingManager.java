@@ -14,6 +14,14 @@ public interface MatchmakingManager {
     public static final RedisConnection DEFAULT_READ_CONNECTION = new SimpleRedisConnection(SLAVE, "DEFAULT-SLAVE-01", "127.0.0.1", 6379);
     
     /**
+     *
+     * Get id of matchmaking
+     *
+     * @return matchmaking id
+     */
+    String getMatchmakingId();
+    
+    /**
      * Publish command to redis server.
      *
      * @param command   A storage of the command.

@@ -65,6 +65,11 @@ final class MatchmakingManagerImpl implements MatchmakingManager {
     }
     
     @Override
+    public String getMatchmakingId() {
+        return matchmakingId;
+    }
+    
+    @Override
     public <C extends Command> void publishRedis(C command) {
         String key = null;
         for(Map.Entry<String, CommandStorage> entry : commandStorages.entrySet()) {
