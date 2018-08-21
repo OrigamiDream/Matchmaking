@@ -16,25 +16,25 @@ mvn clean install
 
 ### How to use
 To create your new matchmaking structure, write following code:
-```
+```java
 MatchmakingManager matchmaking = Matchmaking.getInstance().getManager("matchmaking-01");
 ```
 You can get list of allocated matchmaking managers by:
-```
+```java
 Collection<MatchmakingManager> managers = Matchmaking.getInstance().getManagers();
 ```
 To connect your own redis server, write following code:
-```
+```java
 matchmaking.registerConnection(new SimpleRedisConnection(RedisType.MASTER, "new-name", "127.0.0.1", 6379));
 ```
 Basically, The API supports default connections to use Redis without registration.
-```
+```java
 MatchmakingManager.DEFAULT_WRITE_CONNECTION
 MatchmakingManager.DEFAULT_READ_CONNECTION
 ```
 
 **Creating a new Redis handler**
-```
+```java
 public class NewHandler extends Command implements CommandResponse {
     
     private final String myHandlerName;
@@ -64,11 +64,11 @@ public class NewHandler extends Command implements CommandResponse {
 }
 ```
 **Registering your new Redis handler**
-```
+```java
 matchmaking.registerRedis("myHandlerKey", NewHandler.class);
 ```
 **Publishing your Redis handler**
-```
+```java
 NewHandler newHandler = new NewHandler("my handler name", "my message");
 newHandler.setDestinations("target-matchmaking-id");
 matchmaking.publishRedis(newHandler);
