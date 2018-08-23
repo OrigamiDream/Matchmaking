@@ -6,6 +6,7 @@ package av.is.matchmaking.match;
 public enum ProcessResult {
     
     SUCCESS,
-    FAILURE
+    FAILURE,
+    NO_AVAILABLE
     
 }
