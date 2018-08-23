@@ -17,8 +17,10 @@ public class ProcessHandlerRegistration {
         
         manager.registerRedis(MatchProcessRequest.MATCH_PROCESS_REQUEST_KEY, MatchProcessRequest.class, null);
         manager.registerRedis(MatchProcessResult.MATCH_PROCESS_RESPONSE_KEY, MatchProcessResult.class, new ProcessHandlerResponse());
+    
+        System.out.println("Sending new Skywars server request");
         
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 3; i++) {
             Command command = new MatchProcessRequest(manager.getMatchmakingId(), "Skywars");
             command.setDestinations("processor");
             manager.publishRedis(command);
