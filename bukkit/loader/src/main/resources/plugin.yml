@@ -1,0 +1,5 @@
+name: MatchmakingLoader
+version: 1.0
+main: av.is.matchmaking.loader.MatchmakingLoader
+description: To responds to matchmaking processor center
+author: OrigamiDream

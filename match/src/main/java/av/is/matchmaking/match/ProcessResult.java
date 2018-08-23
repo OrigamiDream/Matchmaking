@@ -7,6 +7,6 @@ public enum ProcessResult {
     
     SUCCESS,
     FAILURE,
-    NO_AVAILABLE
+    NOT_AVAILABLE
     
 }

@@ -13,6 +13,7 @@
         <module>example</module>
         <module>processor</module>
         <module>match</module>
+        <module>bukkit</module>
     </modules>
 
     <dependencies>

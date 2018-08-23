@@ -26,6 +26,10 @@ public class ProcessHandlerResponse implements CommandResponse {
                 case FAILURE:
                     System.out.println("Result: FAILURE");
                     break;
+    
+                case NOT_AVAILABLE:
+                    System.out.println("Result: NOT_AVAILABLE");
+                    break;
             }
         }
     }

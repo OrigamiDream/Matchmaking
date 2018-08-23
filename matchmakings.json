@@ -1,0 +1,12 @@
+[
+  {
+    "matchType": "Skywars",
+    "directory": "Matchmaking/Skywars01",
+    "command": "sh run.sh"
+  },
+  {
+    "matchType": "Skywars",
+    "directory": "Matchmaking/Skywars02",
+    "command": "sh run.sh"
+  }
+]

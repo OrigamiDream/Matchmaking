@@ -25,18 +25,24 @@ public class MatchRegistry {
     }
 
     public List<ServerInfo> getServers(String matchType) {
-        return servers.get(matchType);
+        synchronized(this) {
+            return servers.get(matchType);
+        }
     }
 
     public List<ServerInfo> getUsableServers(String matchType) {
-        return getServers(matchType).stream().filter(ServerInfo::isUsing).collect(Collectors.toList());
+        return getServers(matchType).stream().filter(ServerInfo::isNotUsing).collect(Collectors.toList());
     }
 
     public void addServer(String matchType, File directory, String runCommand) {
-        servers.put(matchType, new ServerInfo(directory, runCommand));
+        synchronized(this) {
+            servers.put(matchType, new ServerInfo(directory, runCommand));
+        }
     }
 
     public void addServer(String matchType, ServerInfo serverInfo) {
-        servers.put(matchType, serverInfo);
+        synchronized(this) {
+            servers.put(matchType, serverInfo);
+        }
     }
 }
