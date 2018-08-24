@@ -5,7 +5,6 @@ import av.is.matchmaking.processor.command.CommandRegistry;
 import av.is.matchmaking.processor.command.commands.CommandHelp;
 import av.is.matchmaking.processor.command.commands.CommandPerform;
 import av.is.matchmaking.processor.command.commands.CommandServers;
-import av.is.matchmaking.processor.pool.ServerPool;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Created by OrigamiDream on 2018-08-17.
  */
-public class MatchRegistry {
+public final class MatchRegistry {
 
     private final ListMultimap<String, ServerInfo> servers = ArrayListMultimap.create();
     private final MatchmakingManager matchmakingManager;
@@ -58,12 +57,6 @@ public class MatchRegistry {
         }
     }
 
-    public Collection<ServerInfo> getServers() {
-        synchronized (this) {
-            return servers.values();
-        }
-    }
-
     public Optional<ServerInfo> getServerByMatchId(String matchId) {
         synchronized (this) {
             return servers.values().stream().filter(serverInfo -> serverInfo.getUniqueId() != null && serverInfo.getUniqueId().equals(matchId)).findFirst();
@@ -73,6 +66,12 @@ public class MatchRegistry {
     public Optional<ServerInfo> getServerById(String serverId) {
         synchronized (this) {
             return servers.values().stream().filter(serverInfo -> serverInfo.getServerId() != null && serverInfo.getServerId().equals(serverId)).findFirst();
+        }
+    }
+
+    public Collection<ServerInfo> getServers() {
+        synchronized (this) {
+            return servers.values();
         }
     }
 

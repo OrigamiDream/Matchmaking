@@ -19,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by OrigamiDream on 2018-08-17.
  */
-public class MatchmakingProcessor {
+public final class MatchmakingProcessor {
     
     public static void main(String args[]) throws IOException {
         Matchmaking matchmaking = Matchmaking.getInstance();

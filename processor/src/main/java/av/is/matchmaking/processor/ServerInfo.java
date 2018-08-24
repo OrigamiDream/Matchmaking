@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ServerInfo implements Runnable {
+public final class ServerInfo implements Runnable {
 
     private final File directory;
     private final String command;

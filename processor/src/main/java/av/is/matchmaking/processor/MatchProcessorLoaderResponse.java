@@ -10,7 +10,7 @@ import av.is.matchmaking.processor.command.CommandException;
 import java.util.List;
 import java.util.Optional;
 
-public class MatchProcessorLoaderResponse implements CommandResponse {
+final class MatchProcessorLoaderResponse implements CommandResponse {
     
     private final MatchRegistry matchRegistry;
     

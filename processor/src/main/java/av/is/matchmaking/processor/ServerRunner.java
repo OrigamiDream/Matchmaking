@@ -6,25 +6,18 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class ServerRunner implements Runnable {
+final class ServerRunner implements Runnable {
 
-    private final Process process;
-    private final MatchIdentifiers identifiers;
     private final AtomicBoolean running = new AtomicBoolean(true);
 
     private final BufferedWriter writer;
     private final BufferedReader reader;
 
     ServerRunner(Process process, File directory) {
-        this.process = process;
-        this.identifiers = new MatchIdentifiers(directory, new File(directory, "matchmaking.properties"), false);
+        new MatchIdentifiers(directory, new File(directory, "matchmaking.properties"), false);
 
-        this.writer = new BufferedWriter(new OutputStreamWriter(this.process.getOutputStream()));
-        this.reader = new BufferedReader(new InputStreamReader(this.process.getInputStream()));
-    }
-    
-    MatchIdentifiers getIdentifiers() {
-        return identifiers;
+        this.writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+        this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
     }
     
     void setRunning(boolean running) {

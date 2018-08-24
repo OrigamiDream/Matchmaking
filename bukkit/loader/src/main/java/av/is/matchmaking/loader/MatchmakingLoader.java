@@ -15,7 +15,8 @@ import java.util.Arrays;
 import static av.is.matchmaking.match.MatchProcessLoader.MATCH_PROCESS_LOADER_KEY;
 
 public class MatchmakingLoader extends JavaPlugin {
-    
+
+    private static final String DESTINATION = "processor";
     private static final String PROPERTIES_FILE = "matchmaking.properties";
     
     private MatchmakingManager matchmakingManager;
@@ -40,7 +41,7 @@ public class MatchmakingLoader extends JavaPlugin {
             System.out.println("Publishing server enabled.");
             if(identifiers.getUniqueId() != null) {
                 Command command = new MatchProcessLoader(identifiers.getUniqueId(), identifiers.getMatchType(), identifiers.getServerName(), identifiers.getAddress(), Integer.parseInt(identifiers.getPort()), MatchSwitch.ENABLE);
-                command.setDestinations("processor");
+                command.setDestinations(DESTINATION);
                 matchmakingManager.publishRedis(command);
             }
         }, 20L);
@@ -52,7 +53,7 @@ public class MatchmakingLoader extends JavaPlugin {
             System.out.println("Publishing server disabled.");
             if(identifiers.getUniqueId() != null) {
                 Command command = new MatchProcessLoader(identifiers.getUniqueId(), identifiers.getMatchType(), identifiers.getServerName(), identifiers.getAddress(), Integer.parseInt(identifiers.getPort()), MatchSwitch.DISABLE);
-                command.setDestinations("processor");
+                command.setDestinations(DESTINATION);
                 matchmakingManager.publishRedis(command);
             }
         }

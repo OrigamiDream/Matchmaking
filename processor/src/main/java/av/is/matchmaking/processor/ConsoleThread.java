@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleThread implements Runnable {
+public final class ConsoleThread implements Runnable {
 
     private final MatchRegistry registry;
 

@@ -1,6 +1,4 @@
-package av.is.matchmaking.processor.pool;
-
-import av.is.matchmaking.processor.ServerInfo;
+package av.is.matchmaking.processor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +8,12 @@ public final class ServerPool implements Runnable {
 
     private static final Object LOCK = new Object();
 
-    public static class QueueServer {
+    static class QueueServer {
         private final ServerInfo serverInfo;
         private final String matchType;
         private final String senderId;
 
-        public QueueServer(ServerInfo serverInfo, String matchType, String senderId) {
+        QueueServer(ServerInfo serverInfo, String matchType, String senderId) {
             this.serverInfo = serverInfo;
             this.matchType = matchType;
             this.senderId = senderId;
@@ -34,7 +32,7 @@ public final class ServerPool implements Runnable {
         }
     }
 
-    public void addQueue(QueueServer server) {
+    void addQueue(QueueServer server) {
         synchronized (LOCK) {
             queuedServers.add(server);
         }

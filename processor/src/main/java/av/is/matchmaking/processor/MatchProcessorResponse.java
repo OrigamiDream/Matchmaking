@@ -5,14 +5,13 @@ import av.is.matchmaking.api.CommandResponse;
 import av.is.matchmaking.match.MatchProcessRequest;
 import av.is.matchmaking.match.MatchProcessResult;
 import av.is.matchmaking.match.ProcessResult;
-import av.is.matchmaking.processor.pool.ServerPool;
 
 import java.util.List;
 
 /**
  * Created by OrigamiDream on 2018-08-17.
  */
-class MatchProcessorResponse implements CommandResponse {
+final class MatchProcessorResponse implements CommandResponse {
 
     private static final Object LOCK = new Object();
 
