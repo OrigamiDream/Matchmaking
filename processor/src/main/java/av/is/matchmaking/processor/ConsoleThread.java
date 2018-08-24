@@ -37,7 +37,7 @@ public final class ConsoleThread implements Runnable {
                     }
                 }
             }
-            System.out.println("Performed command: " + command);
+            System.out.println("Console performed command: " + command);
             CommandRegistry commandRegistry = registry.getCommandRegistry();
 
             try {
