@@ -16,7 +16,7 @@ public final class ServerInfo implements Runnable {
     private String senderId;
     private String serverId;
 
-    public ServerInfo(File directory, String command) {
+    ServerInfo(File directory, String command) {
         this.directory = directory;
         this.command = command;
     }
