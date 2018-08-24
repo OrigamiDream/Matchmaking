@@ -1,5 +1,4 @@
-<img src="https://www.codefactor.io/repository/github/origamidream/matchmaking/badge"></img>
-
+[![CodeFactor](https://www.codefactor.io/repository/github/origamidream/matchmaking/badge)](https://www.codefactor.io/repository/github/origamidream/matchmaking)
 
 # Matchmaking
 
