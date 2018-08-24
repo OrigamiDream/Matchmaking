@@ -74,5 +74,10 @@ public class MatchmakingProcessor {
         } catch(ParseException e) {
             e.printStackTrace();
         }
+
+        Thread console = new Thread(new ConsoleThread(registry));
+        console.setName("Matchmaking Console");
+        console.setDaemon(true);
+        console.start();
     }
 }

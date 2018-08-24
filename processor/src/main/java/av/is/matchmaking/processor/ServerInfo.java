@@ -14,6 +14,7 @@ public class ServerInfo implements Runnable {
     private String uniqueId;
     private String matchType;
     private String senderId;
+    private String serverId;
 
     public ServerInfo(File directory, String command) {
         this.directory = directory;
@@ -79,6 +80,22 @@ public class ServerInfo implements Runnable {
     public String getSenderId() {
         return senderId;
     }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void performCommand(String command) {
+        try {
+            getProcessor().performCommand(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public void run() {
@@ -91,7 +108,10 @@ public class ServerInfo implements Runnable {
             
             ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", getCommand());
             builder.directory(new File(getDirectory(), "/"));
-            ServerRunner processor = new ServerRunner(builder.start(), getDirectory());
+
+            Process process = builder.start();
+
+            ServerRunner processor = new ServerRunner(process, getDirectory());
             setProcessor(processor);
             processor.run();
         } catch(IOException e) {

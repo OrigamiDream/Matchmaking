@@ -4,13 +4,12 @@ import av.is.matchmaking.api.Command;
 import av.is.matchmaking.match.MatchProcessRequest;
 import av.is.matchmaking.match.MatchProcessResult;
 import av.is.matchmaking.match.ProcessResult;
-
-import java.util.UUID;
+import av.is.matchmaking.processor.pool.ServerPool;
 
 /**
  * Created by OrigamiDream on 2018-08-17.
  */
-public class MatchmakingThread implements Runnable {
+public final class MatchmakingThread implements Runnable {
 
     private final MatchProcessRequest processor;
     private final MatchRegistry registry;
@@ -32,10 +31,7 @@ public class MatchmakingThread implements Runnable {
             
             registry.getMatchmakingManager().publishRedis(command);
         } else {
-            serverInfo.setUniqueId(UUID.randomUUID().toString());
-            serverInfo.setMatchType(processor.getMatchType());
-            serverInfo.setSenderId(processor.getSenderId());
-            serverInfo.run();
+            registry.getPool().addQueue(new ServerPool.QueueServer(serverInfo, processor.getMatchType(), processor.getSenderId()));
         }
     }
 }
