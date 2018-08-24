@@ -37,7 +37,6 @@ public final class ServerPool implements Runnable {
     public void addQueue(QueueServer server) {
         synchronized (LOCK) {
             queuedServers.add(server);
-            System.out.println("Queue added. size: " + queuedServers.size());
         }
     }
 

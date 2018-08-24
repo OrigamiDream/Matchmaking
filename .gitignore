@@ -5,6 +5,7 @@
 /.git
 /target
 /out
+/Matchmaking
 
 # Files
 *.iml
