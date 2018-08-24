@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/origamidream/matchmaking/badge)](https://www.codefactor.io/repository/github/origamidream/matchmaking)
+
 # Matchmaking
 
 <h6>A simple Matchmaking API for minecraft/jvm-environment programs</h6>
