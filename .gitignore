@@ -3,7 +3,11 @@
 # Folders
 /.idea
 /.git
-/target
+bukkit/loader/target
+core/target
+example/target
+match/target
+processor/target
 /out
 /Matchmaking
 
