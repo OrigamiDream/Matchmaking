@@ -5,7 +5,7 @@ dist: trusty
 cache:
   directories:
   - "$HOME/.m2/repository"
-jobs:
+jobs:travis
   include:
   - stage: test
     script:
@@ -13,7 +13,7 @@ jobs:
 deploy:
   provider: releases
   api_key:
-    secure: "Z+KXcFZp4ahGvqLBUG34clSBeNIlFF8cbXzW27HZw/b6bNY60z0p1FdanLx4tnn1YrzCrNF2ojxm/fhTlCjhfdt+rYMOgHZxlbORPsJ4LjjI3Xir12kwbb/BjLekIx2Z0x1TipTR+CJ/NEfbswOSm2XtTIegUjICKI7tFeQUixA7gkS7Z7PZUWDjBeR08sj5zidQfauQaOMgSPwKzBv+q7i2qqMafx0n/8d7nwagg444Tu5PVjLDN4hoIgT+fXleZ9DU36Kkqhiv3m1fcdsXihc99Ukx5X/mJbPGHMNj7/ZE+UQOZavR9ETi/8U+z6IC5LVfsvGUJp/wyKCCF86zUH9D0u9rsTMnvd/ethkQJWnZ5C4DFhmaiC5cOr3xZ3I4xriRPVWT377/J1L3U8vL3rxz6+4++TxCb6KUt8Ul6KmqudIZvPSA/FhKD8vyY+Aozs10rak7jmEbYGWLKfuRgCmkFJR2+a5nfuyb7ghcsNkdEoTzOmbiaSzZBR8lhofBAjwr/rjbXYyO3A9Yb5dxzcVvchIsOWSGHwQasNW3YgPfeLstFGvX4525ZmKpH7NvpDcn7N6B33gw6v4S4fphAVhAD4+gMO8Sei5oCcMpbqymn9v3ls1mTSEdcU2MRjXZE17m/CnpgeOzA8RmMd5lTplJNN8aoSN20cdd1H3J7Io="
+    secure: "HWuGhh1LN9Mtps8GMTwalEl1QNM+IOkkgB+nxzkO+fVM/alLi+ODCnBKIRbZTXHrWvJAH0KGUzAhTyc8hcuuDEbq04NqoBa9rICxJri96ydPS1Vnwws7iMRlpB22ixY9L0JQUH91FgVWe113D+U6e3A0u2TeaqSHKkTc9oc2D03gy4+Yg8Qa3Je3c8nd715Ynou/LGysnsC9wfuy3b3VYDZS0KqVXLUQkqHeA11ABnJI0ua3+i0roR+WH+P2OP7UIHMPfHasqBVbApWLolYuqt+ZVscunMXpAvC2AomnXAe3ojVzwLArNx7cbPND1vkCYU8IhC5dM8FGvaxD/VYeYQIz5bNKdqgq/4Ax3UFTuh1CVBz58dLVRm5qKdqJXZZHTpTGTPhdfkTu+63esd7tRBHoeLYw60vdr4g2XCZsI0jxmnhzwESxwKxTbWPedacJYj0lEBdjVqFvZCKL3z/SNVpOD7TqHpw7n/K4WoHxuow4I1Bw0J2OIPM5qNXEs7mBnrqlsY42f5FbUKgn+ZUJ2/HVe/lAwLO49lwCLzzRxFKBpsj5CdESVtUWLLtwOp38Y/lufJIuKoev0gE/XbrZ6yaTKGqyDcwkm8E9gpK03AGsQ68fu8r+/I2kx7dcpAOYeQi3odSY7hpaBmslNabw7yXe9pdule9aLwXrUYqJNX0="
   skip_cleanup: true
   file_glob: true
   file: "*/target/matchmaking-.jar"
