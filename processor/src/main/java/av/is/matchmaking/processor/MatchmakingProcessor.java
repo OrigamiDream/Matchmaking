@@ -5,6 +5,8 @@ import av.is.matchmaking.api.MatchmakingManager;
 import av.is.matchmaking.match.MatchProcessLoader;
 import av.is.matchmaking.match.MatchProcessRequest;
 import av.is.matchmaking.match.MatchProcessResult;
+import av.is.matchmaking.processor.command.CommandException;
+import av.is.matchmaking.processor.command.CommandRegistry;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -79,5 +81,14 @@ public final class MatchmakingProcessor {
         console.setName("Matchmaking Console");
         console.setDaemon(true);
         console.start();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            CommandRegistry commandRegistry = registry.getCommandRegistry();
+            try {
+                commandRegistry.dispatch(commandRegistry.getCommand("perform"), new String[] { "-a", "stop" });
+            } catch(CommandException e) {
+                e.printStackTrace();
+            }
+        }));
     }
 }
