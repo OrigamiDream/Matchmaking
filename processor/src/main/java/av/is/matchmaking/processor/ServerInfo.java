@@ -2,10 +2,13 @@ package av.is.matchmaking.processor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class ServerInfo implements Runnable {
 
+    private final MatchRegistry matchRegistry;
     private final File directory;
     private final String command;
 
@@ -16,7 +19,8 @@ public final class ServerInfo implements Runnable {
     private String senderId;
     private String serverId;
 
-    ServerInfo(File directory, String command) {
+    ServerInfo(MatchRegistry matchRegistry, File directory, String command) {
+        this.matchRegistry = matchRegistry;
         this.directory = directory;
         this.command = command;
     }
@@ -59,6 +63,7 @@ public final class ServerInfo implements Runnable {
     
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
+        System.out.println("Set UniqueId: " + uniqueId);
     }
     
     public String getUniqueId() {
@@ -100,10 +105,15 @@ public final class ServerInfo implements Runnable {
     @Override
     public void run() {
         try {
-            File file = new File(getDirectory(), getUniqueId() + ".matchmaking-id");
-            if(file.exists()) {
-                file.delete();
+            List<File> remove = new ArrayList<>();
+            for(File file : getDirectory().listFiles()) {
+                if(file.getName().endsWith(".matchmaking-id")) {
+                    remove.add(file);
+                }
             }
+            remove.forEach(File::delete);
+            
+            File file = new File(getDirectory(), getUniqueId() + ".matchmaking-id");
             file.createNewFile();
             
             ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", getCommand());
@@ -111,7 +121,7 @@ public final class ServerInfo implements Runnable {
 
             Process process = builder.start();
 
-            ServerRunner processor = new ServerRunner(process, getDirectory());
+            ServerRunner processor = new ServerRunner(matchRegistry, process, getDirectory());
             setProcessor(processor);
             processor.run();
         } catch(IOException e) {
