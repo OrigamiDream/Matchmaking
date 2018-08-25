@@ -2,8 +2,12 @@ package av.is.matchmaking.processor;
 
 import av.is.matchmaking.match.MatchIdentifiers;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 final class ServerRunner implements Runnable {
@@ -37,9 +41,9 @@ final class ServerRunner implements Runnable {
             e.printStackTrace();
         }
     }
-
+    
     void performCommand(String command) throws IOException {
-        writer.write(command);
+        writer.write(command + "\n");
         writer.flush();
     }
 }
