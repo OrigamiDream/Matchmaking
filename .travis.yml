@@ -5,5 +5,8 @@ deploy:
   api_key:
     secure: WYn4n4LwjoWH3AL8KhXzYXn+dUnZfoXAXO9TQGUkNEbiiDbgYJ/C/vTx3vmes7ya9vwo4+HjWiPvad4zxkqMFp96Ly0FFRfcZyN8DO1NVwx86stmWEkBmrVTFRR//LlC1TdBOC3LXipuD4kR+EU23JWHL8Yqnpb534SCAnnaRY4HCoa7lkmeSTNFcJQrFXDIxjHL9yfUCmaZTqDG9Q3M7r7KTvN+Z1wq0SsVqDN+wBonZIUhUa0UwjjCsRDrAfUENhEVX4WPS3l5D6s4sgQb9ywpuD/YVKvhPosMJ+lUuih/J58NQxznGj5PwajgT+kS/iynkvbMJIqV7tR7kZIlGHKfMb2sNYYODI8qx92cqtGLXJ7/uQNwagX63yL02ORs6DlsHCBf63wvvk9rFavFMFc6i0hlikIU26nLFBb5jQI19B6bx6FhzWLrdm79JM4u3mA4jS7vpZOILDTJWXFDqBz0Wzd0nTZRIyrwaeu7/TLanM6M0HI2xWJjMPjmOgVQ5byzgIDZNUwtnBZf1pTqrpD7U5Ol2mkC8rSm89p0Bz5zdXOwC7WcVepc+34b9bzeRZ1Oa0ymbPEaWeaN6u873bX1mO+cc71sElnRpuaHSUYpILpMXp3JcRyzy38J+Kt1FCM7UrjZ08Nnd1hlGxvaV1zYKCD52Zr2NHyDesEI530=
   file: "*/target/matchmaking*.jar"
+  skip_cleanup: true
   on:
+    tags: true
+    all_branches: true
     repo: OrigamiDream/Matchmaking
