@@ -12,14 +12,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 final class ServerRunner implements Runnable {
 
+    private final MatchRegistry matchRegistry;
+    private final String expectedServerName;
     private final AtomicBoolean running = new AtomicBoolean(true);
 
     private final BufferedWriter writer;
     private final BufferedReader reader;
 
-    ServerRunner(Process process, File directory) {
-        new MatchIdentifiers(directory, new File(directory, "matchmaking.properties"), false);
-
+    ServerRunner(MatchRegistry matchRegistry, Process process, File directory) {
+        this.matchRegistry = matchRegistry;
+        
+        MatchIdentifiers identifiers = new MatchIdentifiers(directory, new File(directory, "matchmaking.properties"), false);
+        
+        this.expectedServerName = identifiers.getServerName();
         this.writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
     }
@@ -34,7 +39,9 @@ final class ServerRunner implements Runnable {
             while(running.get()) {
                 String line;
                 if((line = reader.readLine()) != null) {
-                    System.out.println(line);
+                    if(matchRegistry.isViewable(expectedServerName)) {
+                        System.out.println("[" + expectedServerName + "]: " + line);
+                    }
                 }
             }
         } catch(Exception e) {

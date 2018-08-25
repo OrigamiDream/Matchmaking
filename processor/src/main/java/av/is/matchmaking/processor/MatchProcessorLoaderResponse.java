@@ -5,7 +5,6 @@ import av.is.matchmaking.api.CommandResponse;
 import av.is.matchmaking.match.MatchProcessLoader;
 import av.is.matchmaking.match.MatchProcessResult;
 import av.is.matchmaking.match.ProcessResult;
-import av.is.matchmaking.processor.command.CommandException;
 
 import java.util.List;
 import java.util.Optional;

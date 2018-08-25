@@ -41,7 +41,7 @@ public class CommandContext {
         StringBuilder builder = new StringBuilder();
         for(int i = beginIndex; i < arguments.length; i++) {
             builder.append(arguments[i]);
-            if(i != arguments.length -1) {
+            if(i != arguments.length - 1) {
                 builder.append(" ");
             }
         }

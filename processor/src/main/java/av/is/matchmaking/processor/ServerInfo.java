@@ -32,6 +32,10 @@ public final class ServerInfo implements Runnable {
         setMatchType(null);
         setSenderId(null);
     }
+    
+    public boolean isAvailable() {
+        return processor != null;
+    }
 
     ServerRunner getProcessor() {
         return processor;
@@ -63,7 +67,6 @@ public final class ServerInfo implements Runnable {
     
     public void setUniqueId(String uniqueId) {
         this.uniqueId = uniqueId;
-        System.out.println("Set UniqueId: " + uniqueId);
     }
     
     public String getUniqueId() {
@@ -96,7 +99,9 @@ public final class ServerInfo implements Runnable {
 
     public void performCommand(String command) {
         try {
-            getProcessor().performCommand(command);
+            if(getProcessor() != null) {
+                getProcessor().performCommand(command);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

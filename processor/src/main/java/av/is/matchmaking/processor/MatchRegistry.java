@@ -5,14 +5,17 @@ import av.is.matchmaking.processor.command.CommandRegistry;
 import av.is.matchmaking.processor.command.commands.CommandHelp;
 import av.is.matchmaking.processor.command.commands.CommandPerform;
 import av.is.matchmaking.processor.command.commands.CommandServers;
+import av.is.matchmaking.processor.command.commands.CommandView;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimaps;
 
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
@@ -20,10 +23,12 @@ import java.util.stream.Collectors;
  */
 public final class MatchRegistry {
 
-    private final ListMultimap<String, ServerInfo> servers = ArrayListMultimap.create();
+    private final ListMultimap<String, ServerInfo> servers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final MatchmakingManager matchmakingManager;
     private final CommandRegistry commandRegistry;
     private final ServerPool pool;
+    
+    private AtomicReference<ServerInfo> currentView = new AtomicReference<>(null);
     
     public MatchRegistry(MatchmakingManager matchmakingManager) {
         this.matchmakingManager = matchmakingManager;
@@ -31,6 +36,7 @@ public final class MatchRegistry {
         this.commandRegistry.register(new CommandHelp());
         this.commandRegistry.register(new CommandPerform(this));
         this.commandRegistry.register(new CommandServers(this));
+        this.commandRegistry.register(new CommandView(this));
 
         this.pool = new ServerPool();
         Thread thread = new Thread(this.pool);
@@ -38,7 +44,23 @@ public final class MatchRegistry {
         thread.setDaemon(true);
         thread.start();
     }
-
+    
+    public boolean isViewable(String serverName) {
+        ServerInfo serverInfo = currentView.get();
+        if(serverInfo == null) {
+            return true;
+        }
+        return serverName.equalsIgnoreCase(serverInfo.getServerId());
+    }
+    
+    public AtomicReference<ServerInfo> currentView() {
+        return currentView;
+    }
+    
+    public void setCurrentView(ServerInfo serverInfo) {
+        this.currentView.set(serverInfo);
+    }
+    
     public ServerPool getPool() {
         return pool;
     }
@@ -52,33 +74,27 @@ public final class MatchRegistry {
     }
 
     public Collection<Map.Entry<String, ServerInfo>> getMappedServers() {
-        synchronized (this) {
-            return servers.entries();
-        }
+        return servers.entries();
     }
 
     public Optional<ServerInfo> getServerByMatchId(String matchId) {
-        synchronized (this) {
-            return servers.values().stream().filter(serverInfo -> serverInfo.getUniqueId() != null && serverInfo.getUniqueId().equals(matchId)).findFirst();
-        }
+        return servers.values().stream().filter(serverInfo -> serverInfo.getUniqueId() != null && serverInfo.getUniqueId().equals(matchId)).findFirst();
     }
 
     public Optional<ServerInfo> getServerById(String serverId) {
-        synchronized (this) {
-            return servers.values().stream().filter(serverInfo -> serverInfo.getServerId() != null && serverInfo.getServerId().equals(serverId)).findFirst();
-        }
+        return servers.values().stream().filter(serverInfo -> serverInfo.getServerId() != null && serverInfo.getServerId().equals(serverId)).findFirst();
     }
 
     public Collection<ServerInfo> getServers() {
-        synchronized (this) {
-            return servers.values();
-        }
+        return servers.values();
     }
 
     public List<ServerInfo> getServers(String matchType) {
-        synchronized(this) {
-            return servers.get(matchType);
-        }
+        return servers.get(matchType);
+    }
+    
+    public List<ServerInfo> getUsableServers() {
+        return getServers().stream().filter(ServerInfo::isNotUsing).collect(Collectors.toList());
     }
 
     public List<ServerInfo> getUsableServers(String matchType) {
@@ -86,14 +102,10 @@ public final class MatchRegistry {
     }
 
     public void addServer(String matchType, File directory, String runCommand) {
-        synchronized(this) {
-            servers.put(matchType, new ServerInfo(directory, runCommand));
-        }
+        servers.put(matchType, new ServerInfo(this, directory, runCommand));
     }
 
     public void addServer(String matchType, ServerInfo serverInfo) {
-        synchronized(this) {
-            servers.put(matchType, serverInfo);
-        }
+        servers.put(matchType, serverInfo);
     }
 }
