@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.Arrays;
 
 import static av.is.matchmaking.match.MatchProcessLoader.MATCH_PROCESS_LOADER_KEY;
 
