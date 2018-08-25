@@ -30,7 +30,7 @@ public class CommandServers implements Command {
             message.append(entry.getKey()).append(" - ");
             if(serverInfo.isUsing()) {
                 if(serverInfo.getServerId() != null) {
-                    message.append(serverInfo.getUniqueId()).append(" - ONLINE");
+                    message.append(serverInfo.getServerId()).append(" - ONLINE");
                 } else {
                     message.append("LOADING");
                 }
