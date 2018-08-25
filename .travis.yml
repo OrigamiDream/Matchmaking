@@ -1,22 +1,9 @@
 language: java
-install: true
-jdk: openjdk8
-dist: trusty
-cache:
-  directories:
-  - "$HOME/.m2/repository"
-jobs:
-  include:
-  - stage: test
-    script:
-    - "./mvnw clean verify"
+jdk: oraclejdk8
 deploy:
   provider: releases
   api_key:
-    secure: jzYx3AJ+H1CfxuIeziCYM7kFUQ9rKZrmg7hSs0Qh5Tk2eYrdHynRdCrwEXlP9gLsYZkRoyrepv3Kv18h2PBlw9vaQ8gnwC+EPQcEnymMBSQZeWfZDfLBfc3I8QXB1b9Idpylti1WjcUOhwIST08BJgeAg2EBBlpxUnC+NAKJvgomyFMUIE3Eq19PNZG4snE9PRg9/85D/S2QCMHVHIjqyVxh+f25VUtbaVaK89+35LlSRSZeG+WaoGMlgoKPGPmwTz8e/gsOHlKo/7wWMZRg+2rlCNIIpQiq7BBOfjRW+AK2d8KJam4XExwggYRYEBOPr4rhcgSZ8iBVAFRd0A6JInqlqY0Cg3Ij4XpmFnOIkeGt6pEnK1huriXzx8ruH26Idc43sNqi2cKkkzJYE93owPnkbBtASO1bQ8zTsq5KIe5So05AcO3CNO2qOQp0W4g+aSQzyldNPn1FRKF86kFkNJNnk+8hGmB3q1mojGYRJCCk594smdBTDxfgvL9bw8BH2aqUZOn9hLNCGdh2pIFRudFtgNTHUUwqVPuYEPF2UF+1hf/Atu6NXUOVH2dnI2itY00c63d6lhaQ62Qlqc5Hc6uMvHUovkhRkwo+wYDGHfKvK8i7F0OyX2s0zhnI5X2RQ3oZXz67VzP57b/TJT/E2fuLMq97WwXP298QSUaA3IM=
-  file_glob: true
-  skip_cleanup: true
-  file: "*/target/matchmaking-*.jar"
+    secure: WYn4n4LwjoWH3AL8KhXzYXn+dUnZfoXAXO9TQGUkNEbiiDbgYJ/C/vTx3vmes7ya9vwo4+HjWiPvad4zxkqMFp96Ly0FFRfcZyN8DO1NVwx86stmWEkBmrVTFRR//LlC1TdBOC3LXipuD4kR+EU23JWHL8Yqnpb534SCAnnaRY4HCoa7lkmeSTNFcJQrFXDIxjHL9yfUCmaZTqDG9Q3M7r7KTvN+Z1wq0SsVqDN+wBonZIUhUa0UwjjCsRDrAfUENhEVX4WPS3l5D6s4sgQb9ywpuD/YVKvhPosMJ+lUuih/J58NQxznGj5PwajgT+kS/iynkvbMJIqV7tR7kZIlGHKfMb2sNYYODI8qx92cqtGLXJ7/uQNwagX63yL02ORs6DlsHCBf63wvvk9rFavFMFc6i0hlikIU26nLFBb5jQI19B6bx6FhzWLrdm79JM4u3mA4jS7vpZOILDTJWXFDqBz0Wzd0nTZRIyrwaeu7/TLanM6M0HI2xWJjMPjmOgVQ5byzgIDZNUwtnBZf1pTqrpD7U5Ol2mkC8rSm89p0Bz5zdXOwC7WcVepc+34b9bzeRZ1Oa0ymbPEaWeaN6u873bX1mO+cc71sElnRpuaHSUYpILpMXp3JcRyzy38J+Kt1FCM7UrjZ08Nnd1hlGxvaV1zYKCD52Zr2NHyDesEI530=
+  file: "*/target/matchmaking*.jar"
   on:
     repo: OrigamiDream/Matchmaking
-    tags: true
