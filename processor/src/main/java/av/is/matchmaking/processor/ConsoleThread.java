@@ -29,7 +29,7 @@ public final class ConsoleThread implements Runnable {
             }
             String label = arguments[0];
             List<String> args = new ArrayList<>();
-            if(arguments.length > 2) {
+            if(arguments.length > 1) {
                 for(int i = 1; i < arguments.length; i++) {
                     String argument = arguments[i];
                     if(argument != null && argument.length() > 0) {
