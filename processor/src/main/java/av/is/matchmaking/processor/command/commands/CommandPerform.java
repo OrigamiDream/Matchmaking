@@ -6,6 +6,8 @@ import av.is.matchmaking.processor.command.Command;
 import av.is.matchmaking.processor.command.CommandContext;
 import av.is.matchmaking.processor.command.CommandException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CommandPerform implements Command {
@@ -29,11 +31,18 @@ public class CommandPerform implements Command {
 
         String matchId = context.getString(0);
         String command = context.getJoinedString(1);
-
-        Optional<ServerInfo> serverInfo = registry.getServerById(matchId);
-        if(!serverInfo.isPresent()) {
-            throw new CommandException("No server found named '" + matchId + "'");
+    
+        List<ServerInfo> servers = new ArrayList<>();
+        if(matchId.equalsIgnoreCase("-a")) {
+            servers.addAll(registry.getServers());
+        } else {
+            Optional<ServerInfo> serverInfo = registry.getServerById(matchId);
+            if(!serverInfo.isPresent()) {
+                throw new CommandException("No server found named '" + matchId + "'");
+            }
+            servers.add(serverInfo.get());
         }
-        serverInfo.get().performCommand(command);
+        
+        servers.forEach(server -> server.performCommand(command));
     }
 }
