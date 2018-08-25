@@ -1,4 +1,5 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/origamidream/matchmaking/badge)](https://www.codefactor.io/repository/github/origamidream/matchmaking)
+[![Build Status](https://travis-ci.org/OrigamiDream/Matchmaking.svg?branch=master)](https://travis-ci.org/OrigamiDream/Matchmaking) [![](https://jitpack.io/v/OrigamiDream/Matchmaking.svg)](https://jitpack.io/#OrigamiDream/Matchmaking)
+[![](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/OrigamiDream/Matchmaking/blob/master/LICENSE)
 
 # Matchmaking
 
