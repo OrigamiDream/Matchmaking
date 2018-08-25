@@ -18,6 +18,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static av.is.matchmaking.processor.Utils.rethrowRunnable;
+
 /**
  * Created by OrigamiDream on 2018-08-17.
  */
@@ -82,13 +84,19 @@ public final class MatchmakingProcessor {
         console.setDaemon(true);
         console.start();
         
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        Thread adapter = new Thread(rethrowRunnable(() -> {
             CommandRegistry commandRegistry = registry.getCommandRegistry();
-            try {
-                commandRegistry.dispatch(commandRegistry.getCommand("perform"), new String[] { "-a", "stop" });
-            } catch(CommandException e) {
-                e.printStackTrace();
+            commandRegistry.dispatch(commandRegistry.getCommand("perform"), new String[] { "-a", "stop" });
+            System.out.println("Processor will be shutdown as soon as possible...");
+            while(registry.getUsableServers().size() > 0 && registry.getUsableServers().stream().anyMatch(ServerInfo::isAvailable)) {
+                Thread.sleep(50L);
             }
+            System.out.println("All servers are disabled.");
+            System.out.println("Shutdown in 5 seconds...");
+            Thread.sleep(5000L);
         }));
+        adapter.setName("Matchmaking ShutdownHook");
+        adapter.setDaemon(true);
+        Runtime.getRuntime().addShutdownHook(adapter);
     }
 }
