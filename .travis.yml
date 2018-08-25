@@ -1,9 +1,14 @@
 language: java
+install: true
 jdk: oraclejdk8
+cache:
+  directories:
+  - "$HOME/.m2/repository"
 deploy:
   provider: releases
   api_key:
     secure: PbvDMELAI58/e7rIhYt4m3YI7GNaTzHmIdDNAV5fStuP97rpo1UlA0Zs3+T+YcTCZffiqLlQ+Vs1lUFN1zqgWuazdOQ3p1WbNX/wt/r9kJgoqo/sevHLPlimUPOyJDOYonN/NPvH0hpwKO22N5+yB2wWG50dWI+orIRwXci/KEbjC9zcjEmxTffGZLwus+Eo9Hw1euQfLj/5mq7g53fK3CO9a2YL+vkY0HkUYFMs95uFXuYTyzI777uL7VEZ0Tw89h1qPWAqcDgsTONi/kEvz1nxLHBwAKhfLtjg9y6/w7uJXwc+v4oVAlq5pMwWxfRgaF2iDJA4pK3nXbrtvjZlpWOxf6yTTpt1ZMq3hnI5ye0HErxfIKdpWADw3hXbOb+bPri0ZNsjDN2wSpz8FmgDeVK5TxnGDlqGWR6jNMZelYg/Peg8oaXSTXOPPVV+ASGucFRNiEktGkWC62GGd7Bi9Vopi5ZGeqfWJXFMvl8vQ81syXNhM3aLczssYU0z8YIQApB3MloVUwCUqoDUkjDrZgRR38T0nPosvh+rHxpiJ/AJyhpW8cq+7inOn7WNViNHPBGCoFjWysoGrYXp6Xd4A34BZYUC6MyE6ZfQgmdYDfa2txo10Vea8mz/M1fViSHAiNY7KIWLjeEm1XaxaBljC5n8+LF+Vb5DTTwvF5OdTbA=
   file: "*/target/matchmaking*.jar"
   on:
-    repo: OrigamiDream/Matchmaking
+    all_branches: true
+    condition: "$TRAVIS_TAG =~ ^release.v[0-9]+\\.[0-9]+\\.[0-9]+"
