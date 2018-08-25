@@ -1,5 +1,7 @@
 language: java
-jdk: oraclejdk8
+install: true
+jdk: openjdk8
+dist: trusty
 cache:
   directories:
   - "$HOME/.m2/repository"
@@ -8,14 +10,12 @@ jobs:
   - stage: test
     script:
     - "./mvnw clean verify"
-before_install:
-- >-
-  openssl aes-256-cbc
-  -K $encrypted_xxxxxxxxxxxx_key
-  -iv $encrypted_xxxxxxxxxxxx_iv
-  -in github_deploy_key.enc
-  -out github_deploy_key
-  -d
-- chmod 600 github_deploy_key
-- eval $(ssh-agent -s)
-- ssh-add github_deploy_key
+deploy:
+  provider: releases
+  api_key:
+    secure: VnrVqKmiBxEg5/b7Z+m3H0vPeboDF+zigGxHmRpXudEZWRwN/lJt+NXjQRpjDT0TlpWTHlhdfPhGhUdg3zEmKgQsYu3/b1EULf9TGHUu629jGheSVyS/VSIa0sU/1/Idg92th/Vl5vvuSwDlDZdHWAPa5PtIHMlGW6xZgilJwtn3QcTv18mK8ofhaTZQYtczIe2DncvF6YH9Cs53OYlLzMSbfoQr/cbeWOX6+7qUfTGkyTybB6YibpTWhIVtOs3eN9NhMFYWM3e4yayHC58rsGvDGxnZQp63/UPXPJeGX5tCs4hWciBRsbuhxpoI62VAx0+R2mSBmrbTIQLw585vzhZzq9pPG3/UzvkvlczT+C1qYy7BVcMj0IYEH0CVOGZ0yoreUCBq1N+h8G772bjvGABdiks20WdghwdpDoL+2VOZPUlQNpiUBI5MyOJAaAb5xQAUVwEyLL2ppwZKBdgwxLrepKP0mH1U2/c21wRNvrNJzjvVoDxoS8rYhJ+py6dE2ngStyv+vc5AXislGXq2j11Ef05A2blxrAoo9fIOVuynqQqX7yE4fAq5z0D7drVOdB/wVIh+Oo8TCmm1JJ38Q8F4IfkjsdfclsK/ztInOFiVcFR3k0SNbHwtsHU+qBGbKIL6wRJu6yXc8c2XfcyCJzRaxxEhFb7XMrRkldUNVAQ=
+  skip_cleanup: true
+  file: "*/target/matchmaking-.jar"
+  on:
+    repo: OrigamiDream/Matchmaking
+    tags: true
