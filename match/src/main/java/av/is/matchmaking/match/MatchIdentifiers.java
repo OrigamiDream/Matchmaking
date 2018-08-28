@@ -1,9 +1,6 @@
 package av.is.matchmaking.match;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -60,6 +57,16 @@ public final class MatchIdentifiers {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void synchronizeServerProperties(File serverFile) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(serverFile));
+
+        properties.setProperty("server-ip", getAddress());
+        properties.setProperty("server-port", getPort());
+
+        properties.store(new FileOutputStream(serverFile), "Synchronized by matchmaking");
     }
     
     public String getUniqueId() {

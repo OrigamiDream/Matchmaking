@@ -23,7 +23,11 @@ final class ServerRunner implements Runnable {
         this.matchRegistry = matchRegistry;
         
         MatchIdentifiers identifiers = new MatchIdentifiers(directory, new File(directory, "matchmaking.properties"), false);
-        
+        try {
+            identifiers.synchronizeServerProperties(new File(directory, "server.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.expectedServerName = identifiers.getServerName();
         this.writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
