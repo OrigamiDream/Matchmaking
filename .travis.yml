@@ -9,5 +9,7 @@ deploy:
   api_key:
     secure: ccS+s8+4Gt/18H94wq76GNNBsS4FPHsbbwujG15HRhniOIuUkcCR061vbD7g5pV9yQoQi2PhW+1g4fCuwicrSHWbiIObixdb3om7B0+xH/HBfTISRQa9Q0wbSuwrkDetFEiTiZYcsByISPbPw6fIkAfvr91HQKwkC5cWY1uroJ1/DteR59uiAfzV4MRA5l6qgqtRlgjByVXArgtJKpzz6h3P+T3AL+kOUmQPJT235t1P7DNBVal3grFdIiilEBkDhZW9mRna8Kb+GUiD9trHRkFEHdSgXH26XyivEdy+jIIxeckbuuw2RIzGf4OYyt5V4nZkVJPJ5aGraBGHPagpFGeeqKgVdY0n16YFFonf35oXTMRuZSY/yAlQe3qML9pfmdTKiBfFCmFbZImK11tBOYuhRSKvdloVB36epFXcwe8L0nPSKWDTRdjQPdq7pMK+BCgUW8lXwPMDDL2+jO6WPbL04g5a5qZL4AAKUGjkAMq2HT0BmSNSSzhLrdepBUJBIPGq42/eqyZgf2vU5crcb+8fuIguFvRUGbcA5hPNtmL9sSFUUK7LyBWyPzSKW9mPdkvz3iBS13lO69ZmoHhJSwopZ10AOtC12yNgq2/t+sCkhso16gy62P5yrG4U/SKS1s53y/69USndTKG7PzKj8C8D+n+JU5Nkc/m69i2hu+c=
   file: "*/target/matchmaking*.jar"
+  skip_cleanup: true
   on:
     repo: OrigamiDream/Matchmaking
+    tags: true
