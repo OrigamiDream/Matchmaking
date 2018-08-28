@@ -59,14 +59,18 @@ public final class MatchIdentifiers {
         }
     }
 
-    public void synchronizeServerProperties(File serverFile) throws IOException {
-        Properties properties = new Properties();
-        properties.load(new FileInputStream(serverFile));
+    public void synchronizeServerProperties(File serverFile) {
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileInputStream(serverFile));
 
-        properties.setProperty("server-ip", getAddress());
-        properties.setProperty("server-port", getPort());
+            properties.setProperty("server-ip", getAddress());
+            properties.setProperty("server-port", getPort());
 
-        properties.store(new FileOutputStream(serverFile), "Synchronized by matchmaking");
+            properties.store(new FileOutputStream(serverFile), "Synchronized by matchmaking");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public String getUniqueId() {
