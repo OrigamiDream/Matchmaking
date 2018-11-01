@@ -4,11 +4,3 @@ jdk: oraclejdk8
 cache:
   directories:
   - "$HOME/.m2/repository"
-deploy:
-  provider: releases
-  api_key:
-    secure: D1oAfXQVOb+eqBATawsAJL6dsNBZRD2jEgyQ5t4xA+khtL3jSfu0dF3aGNhT8PbIxd/zDOaATiX2dnu/a9JGO6xtNFHBa6SLaqQNn7VUzF2MiV1288FBQenFMX6szHowKWQi67CeiR6hKxm8UtyziRjbG+FFEdiAMOp6pGAJe6zSNtW0IuCM3J5pagsTxJqcRQtMvsdkJJIDCnJfq/odsn6LV6lE+fIMGMvqhxMBbsLJKScaVg8cIWXho1lfoZnrJVJODa2DOQIL1KtXLKb69ZpFo3Jc9sTd2oAXSeozqOR0wpulP4I1rddg4axAEUtxeZ8GxPpU4Ude2OPe7aPFPK9vbxHqJJMKWXdGbuvZdXBGojEWrBybnBkI4agFvR+RdnzRsh5/L0PWhMdpqlxjZGbzbpySyEaSDI2JiKRrBDqxyPZEX+Z1y+vag/C7mZGzz9KxgZyD3ghHIWdGE3dVFlmQUDZEuVHaXKBTozNnqI4uQSL4NRisJPUUw33i0LC9Kju8/AjaVc2+IppQpYxyBlaKClaWS3CgMUvCoG7+yJ4aQK3SDAiuBj4ZZM84dfahoCCElr4gwHUr2VnM0qkY9KC1+XEdZfhNwDsLr+KibIFxkti793SuwKRvReBz/yPuw1DTKxfTTjeqKyeONks/LzN7u91IQgBR9XzwP5GQumg=  file: "*/target/matchmaking*.jar"
-  skip_cleanup: true
-  on:
-    repo: OrigamiDream/Matchmaking
-    tags: true
