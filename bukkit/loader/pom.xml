@@ -12,6 +12,7 @@
     <artifactId>matchmaking-loader</artifactId>
 
     <build>
+        <finalName>matchmaking-loader</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

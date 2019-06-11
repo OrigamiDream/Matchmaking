@@ -1,6 +1,22 @@
 language: java
-install: true
-jdk: oraclejdk8
+
+script: ./mvnw clean package
+
 cache:
   directories:
-  - "$HOME/.m2/repository"
+    - $HOME/.m2
+
+deploy:
+  provider: releases
+  api_key:
+    secure: I8vEMhppPj8bonsNZDCIQVfrdAxUamyWi1241ZCsqTN/u1nu2VLsJmLl0rwxvfyCrfuTo3rv51QsVVNhOu/x/jP1dUWlxsd0Zmyv2arGuwi90xipXl7iuHN9NN8+RgbfMNEjmKy7EKcKfihTAhJfqJtoqEFGokoZV63y3ryDpplVtN4XPcYf6WAXmihsdQYufqXofLnBdnl6onRW5SyY7Zvgrv85BBRYVUvQ08rmPF5wgj1Y822RVgFmOBGgZKOIu/MdBM9myW4LT8yv46w1D7ZRjzOchMTdemXQ0Uhnu7R3h1ozWYbP0304KVTzX2gqk64VeHDtSpsLaL4Mw+32JrR05mwWlcNTSNkzbJgwPEA5YhTyBZua+94XLvkdsGnUfXevWTiNtwa8IdREIWZ7DsHd7YfkF2mt+6Z+BDjTZ0rhH9Eph8fPZ8BKIObrYoFHKFWrDLIS3CY5ce+sXzwd0fCfa+Oa9wO2OA8uWvwvtWsGVTs/EhGn4TaliZHL6AIBvbKsfysFGzFgKZ4o1+pOpalzTo2Opy6ueMRPPoLOpnVAHT3mcQHlfuPFWYYoURoq70r/5pkKcbR45/PVCMiGNko1tyr1yK5a0SWtmcQct1hA7wflzd9v3CS+uMpGYaEa1h2QcMjmVFaCali9IpAiKnEAKiivRQcjTmeNBRya0dg=
+  file:
+    - processor/target/matchmaking-processor.jar
+    - core/target/matchmaking-core.jar
+    - bukkit/loader/target/matchmaking-loader.jar
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    repo: OrigamiDream/Matchmaking
